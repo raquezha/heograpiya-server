@@ -1,1 +1,1 @@
-web: ./build/install/projectName/bin/heograpiya-web
+web: ./build/install/projectName/bin/heograpiya-server
