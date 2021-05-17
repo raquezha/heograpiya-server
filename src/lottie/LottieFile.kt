@@ -1,14 +1,17 @@
 package com.raquezha.lottie
 
+import io.ktor.locations.*
 import kotlinx.serialization.Serializable
 
+@KtorExperimentalLocationsAPI
+@Location("/splash/{url}/{description}")
 @Serializable
 data class LottieFile(
     val description: String,
     val url: String,
-    val active: Boolean
+    var active: Boolean = true
 ) {
     companion object {
-        const val path = "/lottiefile"
+        const val path = "/lottiefiles"
     }
 }

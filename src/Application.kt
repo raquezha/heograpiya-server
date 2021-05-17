@@ -121,8 +121,26 @@ fun Application.module(testing: Boolean = false) {
             }
         }
 
+
         get(LottieFile.path) {
             call.respond(lottieFile)
+        }
+
+        get("/splash") {
+            val splash = lottieFile.lottieFiles.filter {
+                it.active
+            }.first()
+            call.respond(
+                splash
+            )
+        }
+
+        get<LottieFile> {
+            lottieFile.lottieFiles.forEach { lottieFile ->
+                lottieFile.active = false
+            }
+            lottieFile.lottieFiles.add(it.copy(active = true))
+            call.respondText("${it.url} added!")
         }
 
         get<SampleLocation> {
@@ -149,7 +167,7 @@ fun Application.module(testing: Boolean = false) {
             )
         }
 
-        get("/location") {
+        get("/locations") {
             call.respond(location)
         }
 
