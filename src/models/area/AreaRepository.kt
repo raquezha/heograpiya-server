@@ -1,34 +1,23 @@
-package com.raquezha
+package com.raquezha.heograpiya.models.area
 
-import com.raquezha.location.Location
-import com.raquezha.location.Provinces
-import com.raquezha.lottie.LottieFile
-import com.raquezha.lottie.LottieFiles
+class AreaRepository {
+    private val records = mutableListOf<Province>()
 
-val lottieFile by lazy { LottieFiles(lottieFileList) }
+    val all: Areas
+        get() = Areas(records)
 
-var lottieFile1: String = "https://assets8.lottiefiles.com/private_files/lf30_qn7ozwlo.json"
-var lottieFile2: String = "https://assets7.lottiefiles.com/packages/lf20_t0mvxlwu.json"
+    fun insert(provinceName: String, cityMunicipality: MutableList<CityMunicipality>) {
+        records += Province(
+            province = provinceName,
+            cityMuncipality = cityMunicipality
+        )
+    }
+}
 
-var lottieFileList = mutableListOf(
-    LottieFile(
-        description = "file1",
-        url = lottieFile1,
-        active = true
-    ),
-    LottieFile(
-        description = "file2",
-        url= lottieFile2,
-        active = false
-    )
-)
-
-val location by lazy { Location(provinceWithLocation) }
-
-val provinceWithLocation = mutableListOf(
-    Provinces(
-        province = "Albay",
-        location = mutableListOf(
+val areaRecord = AreaRepository().apply {
+    insert(
+        provinceName = "Albay",
+        cityMunicipality = mutableListOf(
             "Legazpi City",
             "Ligao City",
             "Tabaco City",
@@ -47,11 +36,11 @@ val provinceWithLocation = mutableListOf(
             "Rapu-Rapu",
             "Santo Domingo",
             "Tiwi"
-        )
-    ),
-    Provinces(
-        province = "Camarines Norte",
-        location = mutableListOf(
+        ).toCityMunicipality()
+    )
+    insert(
+        provinceName = "Camarines Norte",
+        cityMunicipality = mutableListOf(
             "Basud",
             "Capalonga",
             "Daet",
@@ -64,11 +53,11 @@ val provinceWithLocation = mutableListOf(
             "Santa Elena",
             "Vinzons",
             "Talisay"
-        )
-    ),
-    Provinces(
-        province = "Camarines Sur",
-        location = mutableListOf(
+        ).toCityMunicipality()
+    )
+    insert(
+        provinceName = "Camarines Sur",
+        cityMunicipality = mutableListOf(
             "Iriga City",
             "Naga City",
             "Nabua",
@@ -99,11 +88,11 @@ val provinceWithLocation = mutableListOf(
             "Bombon",
             "Cabusa",
             "Balatan"
-        )
-    ),
-    Provinces(
-        province = "Masbate",
-        location = mutableListOf(
+        ).toCityMunicipality()
+    )
+    insert(
+        provinceName = "Masbate",
+        cityMunicipality = mutableListOf(
             "Mabaste City",
             "Aroroy",
             "Baleno",
@@ -125,11 +114,11 @@ val provinceWithLocation = mutableListOf(
             "San Jacinto",
             "San Pascual",
             "Uson"
-        )
-    ),
-    Provinces(
-        province =  "Sorsogon",
-        location = mutableListOf(
+        ).toCityMunicipality()
+    )
+    insert(
+        provinceName = "Sorsogon",
+        cityMunicipality = mutableListOf(
             "Bagamanoc",
             "Baras",
             "Bato",
@@ -140,11 +129,11 @@ val provinceWithLocation = mutableListOf(
             "San Adres",
             "San Miguel",
             "Viga",
-        )
-    ),
-    Provinces(
-        province = "Catanduanes",
-        location = mutableListOf(
+        ).toCityMunicipality()
+    )
+    insert(
+        provinceName = "Catanduanes",
+        cityMunicipality = mutableListOf(
             "Barcelona",
             "Bulan",
             "Bulusan",
@@ -159,8 +148,12 @@ val provinceWithLocation = mutableListOf(
             "Pilar",
             "Prieto Diaz",
             "Santa Magdalena"
-        )
+        ).toCityMunicipality()
     )
-)
+}
 
-
+fun MutableList<String>.toCityMunicipality(): MutableList<CityMunicipality> {
+    return map {
+        CityMunicipality(it)
+    }.toMutableList()
+}

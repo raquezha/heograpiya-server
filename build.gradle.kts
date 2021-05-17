@@ -9,7 +9,7 @@ plugins {
 }
 
 
-group = "com.raquezha"
+group = "com.raquezha.heograpiya"
 version = "0.0.1"
 
 application {
